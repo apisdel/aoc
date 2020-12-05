@@ -1,23 +1,19 @@
 export const part1 = (input) => {
-    let answer = input
+    return input
         .split("\n")
         .filter(l => l !== "")
         .map(parse)
         .filter(validator1)
         .length;
-
-    return answer;
 }
 
 export const part2 = (input) => {
-    let answer = input
+    return input
         .split("\n")
         .filter(l => l !== "")
         .map(parse)
         .filter(validator2)
         .length;
-
-    return answer;
 }
 
 const parse = (str) => {

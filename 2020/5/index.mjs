@@ -1,9 +1,6 @@
 const calculateId = (code) => {
     //replace with 0/1 and convert the resulting binary to decimal
-    const row = parseInt(code.slice(0, 7).toString().replace(/F/g, 0).replace(/B/g, 1), 2);
-    const col = parseInt(code.slice(7).toString().replace(/L/g, 0).replace(/R/g, 1), 2);
-
-    return row * 8 + col;
+    return parseInt(code.replace(/[F|L]/g, 0).replace(/[B|R]/g, 1), 2);
 }
 
 export const part1 = (input) => {
