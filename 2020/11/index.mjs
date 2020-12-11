@@ -26,7 +26,7 @@ export const part2 = (input) => {
         });
 
     const stepFunction = (state, row, col) => {
-        const neighbours = getNeighboursRay(state, row, col); //different method of neighbours acquisition
+        const neighbours = getNeighboursRay(state, row, col, ['L', '#']); //different method of neighbours acquisition
         const occupiedNeighbours = neighbours.filter((s) => s === '#').length;
         if (state[row][col] === '#' && occupiedNeighbours >= 5) { //different rule
             return 'L';
@@ -91,12 +91,12 @@ const getNeighbours = (grid, row, col) => {
     return neighbours.filter(n => n !== null);
 }
 
-const getNeighboursRay = (grid, row, col) => {
-    const getFirstSeat = (grid, row, col, deltaRow, deltaCol) => {
+const getNeighboursRay = (grid, row, col, symbols) => {
+    const getFirstAvailable = (grid, row, col, deltaRow, deltaCol) => {
         row += deltaRow;
         col += deltaCol;
         while(inBounds(grid, row, col)) {
-            if (grid[row][col] === 'L' || grid[row][col] === '#') {
+            if (symbols.indexOf(grid[row][col]) >= 0) {
                 return grid[row][col];
             } 
             row += deltaRow;
@@ -106,14 +106,14 @@ const getNeighboursRay = (grid, row, col) => {
     }
 
     let neighbours = [];
-    neighbours.push(getFirstSeat(grid, row, col, -1, -1)); //NW
-    neighbours.push(getFirstSeat(grid, row, col, -1, 0));  //N
-    neighbours.push(getFirstSeat(grid, row, col, -1, 1));  //NE
-    neighbours.push(getFirstSeat(grid, row, col, 0, 1));   //E
-    neighbours.push(getFirstSeat(grid, row, col, 1, 1));   //SE
-    neighbours.push(getFirstSeat(grid, row, col, 1, 0));   //S
-    neighbours.push(getFirstSeat(grid, row, col, 1, -1));  //SW
-    neighbours.push(getFirstSeat(grid, row, col, 0, -1));  //W
+    neighbours.push(getFirstAvailable(grid, row, col, -1, -1)); //NW
+    neighbours.push(getFirstAvailable(grid, row, col, -1, 0));  //N
+    neighbours.push(getFirstAvailable(grid, row, col, -1, 1));  //NE
+    neighbours.push(getFirstAvailable(grid, row, col, 0, 1));   //E
+    neighbours.push(getFirstAvailable(grid, row, col, 1, 1));   //SE
+    neighbours.push(getFirstAvailable(grid, row, col, 1, 0));   //S
+    neighbours.push(getFirstAvailable(grid, row, col, 1, -1));  //SW
+    neighbours.push(getFirstAvailable(grid, row, col, 0, -1));  //W
     return neighbours.filter(n => n !== null);
 }
 
