@@ -42,7 +42,7 @@ export const part2 = (input) => {
     }
 
     //each group can be rearranged internally according to its size
-    //we can calculate the possible combinations, but since for the provied input (my at least) there are no bigger groups than 5, we can use the following map of possible arrangements 
+    //we can calculate the possible combinations, but since for the provided input (mine at least) there are no bigger groups than 5, we can use the following map of possible arrangements 
     let combinations = {
         1: 1, //1
         2: 1, //1-2
